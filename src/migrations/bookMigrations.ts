@@ -1,9 +1,13 @@
+// Criação da tabelas de livros no banco de dados
+
 import pool from '../config/database';
 
 const createUsersTable = async () => {
   const client = await pool.connect();
   try {
+    
     // Criação da tabela "books"
+
     const queryText = `
       CREATE TABLE IF NOT EXISTS books (
         id SERIAL PRIMARY KEY,
@@ -16,6 +20,7 @@ const createUsersTable = async () => {
     console.log('Tabela "books" criada com sucesso!');
 
     // Adicionando a coluna 'image' à tabela 'books'
+
     const alterTableQuery = `
       ALTER TABLE books
       ADD COLUMN IF NOT EXISTS image VARCHAR(255);
