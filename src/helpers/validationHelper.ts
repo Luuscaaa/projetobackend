@@ -1,3 +1,5 @@
+// Validações para dados de entrada
+
 export const isValidName = (name: string): boolean => {
   const nameRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s]{3,}$/;
   return nameRegex.test(name);
