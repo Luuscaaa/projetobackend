@@ -6,21 +6,26 @@ export class BookRepository {
   private pool: Pool = pool;
 
   // Método para listar todos os livros
+
   async getAllBooks(): Promise<Book[]> {
     // Incluindo a coluna 'image' na consulta
+
     const { rows } = await this.pool.query('SELECT id, title, author, price, image FROM books');
     return rows;
   }
 
   // Método para adicionar um livro
+
   async addBook(title: string, author: string, price: number, image: string): Promise<Book> {
     // Adicionando 'image' ao comando de inserção
+
     const query = 'INSERT INTO books (title, author, price, image) VALUES ($1, $2, $3, $4) RETURNING id, title, author, price, image';
     const { rows } = await this.pool.query(query, [title, author, price, image]);
     return rows[0];
   }
 
   // Método para buscar um livro pelo ID
+
   async getBookById(id: string): Promise<Book | null> {
     const query = 'SELECT id, title, author, price, image FROM books WHERE id = $1'; // Incluindo 'image'
     const { rows } = await this.pool.query(query, [id]);
@@ -28,6 +33,7 @@ export class BookRepository {
   }
 
   // Função para excluir um livro
+
   async deleteBook(id: string): Promise<boolean> {
     const query = 'DELETE FROM books WHERE id = $1 RETURNING *';
     const { rowCount } = await this.pool.query(query, [id]);
@@ -39,6 +45,7 @@ export class BookRepository {
   }
 
   // Método para atualizar um livro
+  
   async updateBook(id: string, title: string, author: string, price: number, image: string | null): Promise<Book> {
     const query = `
       UPDATE books
