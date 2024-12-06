@@ -1,3 +1,5 @@
+// Controladores para gerenciar usuários utilizando o serviço de autenticação 
+
 import { Request, Response } from "express";
 import { AuthService } from "../services/authService";
 
