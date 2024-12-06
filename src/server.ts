@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import userRoutes from "./routes/authRoutes";
-import bookRoutes from "./routes/bookRoutes"; // Certifique-se de que a rota dos livros está correta
+import bookRoutes from "./routes/bookRoutes"; 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
