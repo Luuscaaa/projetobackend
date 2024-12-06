@@ -1,3 +1,5 @@
+// Cria a tabela de usuários
+
 import pool from '../config/database';
 
 const createUsersTable = async () => {
