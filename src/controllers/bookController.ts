@@ -9,21 +9,25 @@ export const addBook = async (req: Request, res: Response) => {
   const { title, author, price, image } = req.body; // Agora inclui 'image'
 
   // Validação do título
+
   if (!isValidTitle(title)) {
     return res.status(400).json({ error: 'O título deve ter pelo menos 3 caracteres.' });
   }
 
   // Validação do autor
+
   if (!isValidAuthor(author)) {
     return res.status(400).json({ error: 'O autor deve ter pelo menos 3 caracteres e não pode conter números ou caracteres especiais.' });
   }
 
   // Validação do preço
+
   if (!isValidPrice(price)) {
     return res.status(400).json({ error: 'O preço deve ser maior que zero.' });
   }
 
   // Se passar nas validações, cria o livro
+
   try {
     const book = await bookRepository.addBook(title, author, price, image); // Passando 'image'
     res.status(201).json(book);
@@ -33,6 +37,7 @@ export const addBook = async (req: Request, res: Response) => {
 };
 
 // Recupera todos os livros e formata a resposta
+
 export const getBooks = async (req: Request, res: Response) => {
   try {
     const books = await bookRepository.getAllBooks();
@@ -60,6 +65,7 @@ export const getBooks = async (req: Request, res: Response) => {
 };
 
 // Função para buscar um livro pelo ID
+
 export const getBook = async (req: Request, res: Response) => {
   const { id } = req.params;  // Obtém o ID do livro da URL
 
@@ -77,6 +83,7 @@ export const getBook = async (req: Request, res: Response) => {
 };
 
 // Função para excluir um livro
+
 export const deleteBook = async (req: Request, res: Response) => {
   const { id } = req.params; // Obtém o id do livro da URL
 
@@ -97,6 +104,7 @@ export const updateBook = async (req: Request, res: Response) => {
   const { title, author, price, image } = req.body; // Recebe os dados da requisição
 
   // Validação dos dados de entrada
+
   if (!isValidTitle(title)) {
     return res.status(400).json({ error: 'O título deve ter pelo menos 3 caracteres.' });
   }
@@ -111,12 +119,14 @@ export const updateBook = async (req: Request, res: Response) => {
 
   try {
     // Verifica se o livro existe no banco de dados
+
     const existingBook = await bookRepository.getBookById(id);  // Método que busca o livro pelo id
     if (!existingBook) {
       return res.status(404).json({ error: 'Livro não encontrado.' });
     }
 
     // Atualiza o livro
+    
     const updatedBook = await bookRepository.updateBook(id, title, author, price, image);
 
     res.status(200).json(updatedBook);
