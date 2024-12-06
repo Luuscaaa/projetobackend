@@ -1,13 +1,18 @@
+// Autenticação de usuários (login)
+
 import { UserRepository } from '../repositories/userRepository';
 import { isValidEmail, isValidName, isValidpasswordHash } from '../helpers/validationHelper';
 import bcrypt from 'bcrypt'; 
 
+
 export class AuthService {
+
   private userRepository: UserRepository;
 
   constructor() {
     this.userRepository = new UserRepository();
   }
+
 
   async registerUser(name: string, email: string, password: string) {
     if (!isValidName(name)) {
@@ -24,6 +29,7 @@ export class AuthService {
     return await this.userRepository.addUser(name, email, passwordHash); 
   }
 
+
   async loginUser(email: string, password: string) {
     if (!isValidEmail(email)) {
       throw new Error('Email inválido');
@@ -31,6 +37,7 @@ export class AuthService {
     if (!password) {
       throw new Error('Senha não pode ser vazia');
     }
+
 
     const user = await this.userRepository.getUserByEmail(email);
     if (!user) {
