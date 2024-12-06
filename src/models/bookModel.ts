@@ -1,3 +1,5 @@
+// Definição da estrutura de dados
+
 export interface Book {
   id: number;
   title: string;
